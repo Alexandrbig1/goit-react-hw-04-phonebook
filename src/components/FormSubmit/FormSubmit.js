@@ -17,7 +17,7 @@ export default function FormSubmit({ onFormSubmit }) {
   const [contact, setContact] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  function HandleSubmit(values) {
+  function handleSubmit(values) {
     const newValue = { ...values, id: nanoid() };
 
     if (!newValue.contact || !newValue.phoneNumber) {
@@ -48,7 +48,7 @@ export default function FormSubmit({ onFormSubmit }) {
       }}
       validationSchema={formSchema}
       onSubmit={(values, actions) => {
-        HandleSubmit(values);
+        handleSubmit(values);
         actions.resetForm({
           values: {
             contact: contact,

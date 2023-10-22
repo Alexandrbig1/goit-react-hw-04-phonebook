@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filter from "./Filter/Filter";
 import FormSubmit from "./FormSubmit/FormSubmit";
 import ContactsList from "./ContactsList/ContactsList";
@@ -17,10 +17,16 @@ import {
 } from "./AppButton/AppButton";
 
 export default function App() {
-  const [contacts, setContacts] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const startState = JSON.parse(localStorage.getItem("contacts"));
+
+  const [contacts, setContacts] = useState(startState);
+  const [isOpen, setIsOpen] = useState(contacts.length === 0 ? false : true);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredContacts, setFilteredContacts] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  });
 
   function onFormSubmit(contact) {
     const contactExist = contacts.some(
