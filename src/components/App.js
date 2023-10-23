@@ -22,7 +22,6 @@ export default function App() {
   const [contacts, setContacts] = useState(startState);
   const [isOpen, setIsOpen] = useState(contacts.length === 0 ? false : true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredContacts, setFilteredContacts] = useState([]);
 
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));
@@ -42,18 +41,21 @@ export default function App() {
 
   function onDeleteHandler(id) {
     setContacts((contact) => contact.filter((item) => item.id !== id));
-    setFilteredContacts((contact) => contact.filter((item) => item.id !== id));
   }
 
-  function onInputHandler(e) {
-    const searchTerm = e.toLowerCase();
-    setSearchTerm(searchTerm);
+  function changeFilter(e) {
+    const searchContact = e.toLowerCase();
+    setSearchTerm(searchContact);
+  }
 
+  function filteredByContact() {
+    const filter = searchTerm.toLowerCase();
     const filtered = contacts.filter((item) =>
-      item.contact.toLowerCase().includes(searchTerm)
+      item.contact.toLowerCase().includes(filter)
     );
-    setFilteredContacts(filtered);
+    return filtered;
   }
+  const visibleContacts = filteredByContact();
 
   return (
     <AppContainer>
@@ -69,12 +71,11 @@ export default function App() {
               {contacts.length !== 0 && (
                 <AppContactsDiv>
                   <AppTitleH2>Contacts</AppTitleH2>
-                  <Filter contacts={contacts} onInputHandler={onInputHandler} />
+                  <Filter contacts={contacts} onInputHandler={changeFilter} />
                   <ContactsList
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
-                    filteredContacts={filteredContacts}
-                    contacts={contacts}
+                    contacts={visibleContacts}
                     onDeleteHandler={onDeleteHandler}
                   />
                 </AppContactsDiv>
