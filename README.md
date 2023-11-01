@@ -5,7 +5,7 @@ doing homework while studying in bootcamp @GoIT on Fullstack developer course
 
 ## Project Specifications:
 
-React module(states/hooks/localStorage/derivedStates/events/props/forms/libraries/Formik/Yup/ReactIcons/modernNormalize/styledComponents/nanoid)
+React module(hooks/states/localStorage/derivedStates/events/props/forms/libraries/Formik/Yup/ReactIcons/modernNormalize/styledComponents/nanoid)
 
 ## Languages and Tools:
 <div align="center">  
