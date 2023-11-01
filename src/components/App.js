@@ -19,7 +19,9 @@ import {
 export default function App() {
   const startState = JSON.parse(localStorage.getItem("contacts"));
 
-  const [contacts, setContacts] = useState(startState);
+  const [contacts, setContacts] = useState(
+    startState === null ? [] : startState
+  );
   const [isOpen, setIsOpen] = useState(contacts.length === 0 ? false : true);
   const [searchTerm, setSearchTerm] = useState("");
 
